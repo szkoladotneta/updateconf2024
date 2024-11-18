@@ -1,0 +1,84 @@
+@page "/invoice-reader"
+@rendermode InteractiveServer
+
+<PageTitle>Invoice Reader</PageTitle>
+
+@using SmartComponents
+
+<form class="default-form rounded-md bg-gray-200 p-6 shadow-xl mb-12">
+    <div class="grid gap-6 mb-5 md:grid-cols-2">
+        <div>
+            <label for="invoiceNumber">Invoice Number</label>
+            <InputText id="invoiceNumber" @bind-Value="@invoiceNumber"/>
+        </div>
+        <div>
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="@name"/>
+        </div>
+        <div>
+            <label for="rabat">Discount</label>
+            <InputText id="rabat" @bind-Value="@rabat"/>
+        </div>
+        <div>
+            <label for="netto">Net Price</label>
+            <InputText id="netto" @bind-Value="@netto"/>
+        </div>
+        <div>
+            <label for="vat">VAT</label>
+            <InputText id="vat" @bind-Value="@vat"/>
+        </div>
+        <div>
+            <label for="wartoscVAT">VAT Value</label>
+            <InputText id="wartoscVAT" @bind-Value="@wartoscVAT"/>
+        </div>
+        <div>
+            <label for="brutto">Gross Price</label>
+            <InputText id="brutto" @bind-Value="@brutto"/>
+        </div>
+        <div>
+            <label for="bruttotripple">Triple Gross Price</label>
+            <InputText id="bruttotripple"@bind-Value="@bruttotripple"/>
+        </div>
+        <div>
+            <label for="sprzedawca">Seller</label>
+            <InputText id="sprzedawca" @bind-Value="@sprzedawca"/>
+        </div>
+        <div>
+            <label for="adresSprzedawcy">Seller's Address</label>
+            <InputTextArea id="adresSprzedawcy" @bind-Value="@adresSprzedawcy"/>
+        </div>
+        <div>
+            <label for="nipSprzedawcy">Seller's VAT Number</label>
+            <InputText id="nipSprzedawcy" @bind-Value="@vatSellers"/>
+        </div>
+        <div>
+            <label for="nabywca">Buyer</label>
+            <InputText id="nabywca" @bind-Value="@nabywca"/>
+        </div>
+        <div>
+            <label for="adresnabywcy">Buyer's Address</label>
+            <InputTextArea id="adresnabywcy" @bind-Value="@adresnabywcy"/>
+        </div>
+        <div>
+            <label for="nipNabywcy">Buyer's VAT Number</label>
+            <InputText id="nipNabywcy" @bind-Value="@vatBuyers"/>
+        </div>
+        <div>
+            <label for="opis">Description</label>
+            <InputText id="opis" @bind-Value="@opis"/>
+        </div>
+    </div>
+    <div class="flex gap-4">
+        <button class="default-button" type="submit">Submit</button>
+        <button class="default-button secondary mr-auto" type="reset">Reset</button>
+        <SmartPasteButton DefaultIcon class="default-button secondary"/>
+    </div>
+    <p style="visibility: hidden;">
+        <InputText @bind-Value="@error" hidden/>
+    </p>
+</form>
+<p style="color: red">@error</p>
+
+@code {
+    string? invoiceNumber, name, rabat, netto, vat, wartoscVAT, brutto, bruttotripple, sprzedawca, nabywca, adresSprzedawcy, adresnabywcy, vatSellers, vatBuyers, opis, error;
+}

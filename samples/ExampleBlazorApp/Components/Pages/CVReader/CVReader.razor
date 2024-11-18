@@ -1,0 +1,74 @@
+@page "/cvreader"
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+@using SmartComponents
+
+<form>
+
+    <div class="flex gap-4">
+        <SmartPasteButton DefaultIcon class="default-button secondary"/>
+    </div>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>@fullName</h2>
+        </div>
+        <div class="card-body">
+            <h4>Should be recommended for .NET Developer position?</h4>
+            <p>@shouldBeRecommended</p>
+            <h4>Contact Information</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Email:</strong> @email</li>
+                <li class="list-group-item"><strong>Phone:</strong> @phone</li>
+                <li class="list-group-item"><strong>LinkedIn:</strong> <a href="@linkedin">@linkedin</a></li>
+                <li class="list-group-item"><strong>Twitter:</strong> <a href="@twitter">@twitter</a></li>
+                <li class="list-group-item"><strong>Website:</strong> <a href="@website">@website</a></li>
+
+
+            </ul>
+
+            <h4 class="mt-4">Professional Summary</h4>
+            <p>@description</p>
+
+            <h4 class="mt-4">Experience</h4>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <p class="card-text">@experience</p>
+                </div>
+            </div>
+
+            <h4 class="mt-4">Education</h4>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <p class="card-text">@education</p>
+                </div>
+            </div>
+
+            <h4 class="mt-4">Skills</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">@skills</li>
+            </ul>
+        </div>
+    </div>
+    <p style="visibility: hidden">Full Name: <InputText @bind-Value="@fullName"/></p>
+    <p style="visibility: hidden">Position: <InputText @bind-Value="@position"/></p>
+    <p style="visibility: hidden">Description: <InputTextArea @bind-Value="@description"/></p>
+    <p style="visibility: hidden">Education: <InputTextArea @bind-Value="@education"/></p>
+    <p style="visibility: hidden">Address: <InputText @bind-Value="@address"/></p>
+    <p style="visibility: hidden">Email: <InputText @bind-Value="@email"/></p>
+    <p style="visibility: hidden">Phone: <InputText @bind-Value="@phone"/></p>
+    <p style="visibility: hidden">Experience: <InputTextArea @bind-Value="@experience"/></p>
+    <p style="visibility: hidden">LinkedIn: <InputText @bind-Value="@linkedin"/></p>
+    <p style="visibility: hidden">GitHub: <InputText @bind-Value="@github"/></p>
+    <p style="visibility: hidden">Twitter: <InputText @bind-Value="@twitter"/></p>
+    <p style="visibility: hidden">Website: <InputText @bind-Value="@website"/></p>
+    <p style="visibility: hidden">Skills: <InputTextArea @bind-Value="@skills"/></p>
+    
+    <p style="visibility: hidden">Should be recommended for .NET Developer position? 
+        <InputText @bind-Value="@shouldBeRecommended" 
+                   data-smartpaste-description="Write Yes or No if this candidate should be recommended for .NET Developer based on his skills and experience."/>
+        </p></form>
+@code {
+    string? fullName, position, description, education, address, email, phone, experience, linkedin, github, twitter, website, skills, shouldBeRecommended;
+}
