@@ -1,0 +1,89 @@
+﻿@page "/tickets"
+
+@rendermode InteractiveServer
+
+<PageTitle>Smart TextArea</PageTitle>
+
+<form class="default-form rounded-md bg-gray-200 p-6 shadow-xl mb-12">
+    <div class="grid mb-5" data-permanent="combo-box-example">
+        <label for="issue-label">Issue label</label>
+        <SmartComboBox Url="api/suggestions/issue-label"
+                       id="issue-label" @bind-Value="@issueLabel" placeholder=" "/>
+    </div>
+    <div class="grid mb-5">
+        <label for="name">Comment</label>
+        <SmartTextArea UserRole="@currentPreset.Role" UserPhrases="@currentPreset.Phrases" @bind-Value="@currentText"
+                       style="height: 100px;" placeholder="Type your comment here..." autofocus/>
+    </div>
+
+    <label class="mt-8">Preset</label>
+    <select @bind:get="@currentPreset.Name" @bind:set="SelectPreset">
+        @foreach (var preset in presets)
+        {
+            <option value="@preset.Name">@preset.Name</option>
+        }
+    </select>
+
+    <label class="mt-8">Role</label>
+    <input @bind="@currentPreset.Role"/>
+
+    <label class="mt-8">Phrases</label>
+    <textarea rows="6"
+              @bind:get="@string.Join(Environment.NewLine, currentPreset.Phrases)"
+              @bind:set="@(value => { currentPreset.Phrases = value.Split(Environment.NewLine); })"></textarea>
+</form>
+
+@code {
+    private string? issueLabel;
+
+    private string? currentText;
+    private Preset currentPreset;
+
+    private Preset[] presets =
+    [
+        new Preset
+        {
+            Name = "IT Support",
+            Role = "IT support specialist responding to technical issues",
+            Phrases =
+            [
+                "Have you tried turning it off and on again?",
+                "Please provide more details about the issue.",
+                "The issue has been escalated to the relevant team.",
+                "We are currently investigating the problem.",
+                "Thank you for your patience."
+            ]
+        },
+        new Preset
+        {
+            Name = "Project Manager",
+            Role = "Project manager overseeing IT projects",
+            Phrases =
+            [
+                "The project is on track.",
+                "We need to discuss the project timeline.",
+                "Please provide a status update.",
+                "The next milestone is due on NEED_INFO.",
+                "Let's schedule a meeting to discuss further."
+            ]
+        }
+    ];
+
+    public Tickets()
+    {
+        currentPreset = presets[0];
+    }
+
+    private void SelectPreset(string? name)
+    {
+        currentPreset = presets.Single(p => p.Name == name);
+    }
+
+    class Preset
+    {
+        public required string Name { get; set; }
+        public required string Role { get; set; }
+        public required string[] Phrases { get; set; }
+    }
+
+}
